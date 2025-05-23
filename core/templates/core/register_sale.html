@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Registrar Venda{% endblock %}
+{% block heading %}Registrar Nova Venda{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_architect" class="form-label me-3" style="width: 150px;">Arquiteto:</label>
+                {{ form.architect }}
+            </div>
+            {% if form.architect.errors %}
+            <div class="text-danger mb-3">{{ form.architect.errors }}</div>
+            {% endif %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_store" class="form-label me-3" style="width: 150px;">Loja:</label>
+                {{ form.store }}
+            </div>
+            {% if form.store.errors %}
+            <div class="text-danger mb-3">{{ form.store.errors }}</div>
+            {% endif %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_value" class="form-label me-3" style="width: 150px;">Valor:</label>
+                <div class="input-group">
+                    <span class="input-group-text">R$</span>
+                    {{ form.value }}
+                </div>
+            </div>
+            {% if form.value.errors %}
+            <div class="text-danger mb-3">{{ form.value.errors }}</div>
+            {% endif %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_date" class="form-label me-3" style="width: 150px;">Data:</label>
+                {{ form.date }}
+            </div>
+            {% if form.date.errors %}
+            <div class="text-danger mb-3">{{ form.date.errors }}</div>
+            {% endif %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_cpf" class="form-label me-3" style="width: 150px;">CPF/CNPJ:</label>
+                {{ form.cpf }}
+            </div>
+            {% if form.cpf.errors %}
+            <div class="text-danger mb-3">{{ form.cpf.errors }}</div>
+            {% endif %}
+
+            <div class="mb-3 d-flex align-items-center">
+                <label for="id_nota_fiscal" class="form-label me-3" style="width: 150px;">Nota Fiscal:</label>
+                {{ form.nota_fiscal }}
+            </div>
+            {% if form.nota_fiscal.errors %}
+            <div class="text-danger mb-3">{{ form.nota_fiscal.errors }}</div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Registrar Venda</button>
+        </form>
+    </div>
+</div>
+<!-- Flatpickr CSS e JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+<script>
+  flatpickr("#datepicker", {
+    dateFormat: "d/m/Y",  // mesmo formato do Django
+    locale: "pt"          // português
+  });
+</script>
+
+{% endblock %}

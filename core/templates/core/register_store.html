@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Register Store{% endblock %}
+{% block heading %}Register New Store{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Store Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <div class="text-danger">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="id_address" class="form-label">Address</label>
+                {{ form.address }}
+                {% if form.address.errors %}
+                    <div class="text-danger">{{ form.address.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="id_admin" class="form-label">Store Admin</label>
+                {{ form.admin }}
+                {% if form.admin.errors %}
+                    <div class="text-danger">{{ form.admin.errors }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Register Store</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

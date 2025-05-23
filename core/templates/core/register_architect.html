@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Register Architect{% endblock %}
+{% block heading %}Register New Architect{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="id_name" class="form-label">Name</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <div class="text-danger">{{ form.name.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <label for="id_cpf" class="form-label">CPF</label>
+                    {{ form.cpf }}
+                    {% if form.cpf.errors %}
+                        <div class="text-danger">{{ form.cpf.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="id_registration_number" class="form-label">Registration Number</label>
+                {{ form.registration_number }}
+                {% if form.registration_number.errors %}
+                    <div class="text-danger">{{ form.registration_number.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="id_user" class="form-label">Associated User</label>
+                {{ form.user }}
+                {% if form.user.errors %}
+                    <div class="text-danger">{{ form.user.errors }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Register Architect</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
