@@ -1,15 +1,15 @@
 {% extends 'core/base.html' %}
 
-{% block title %}User List{% endblock %}
-{% block heading %}User Management{% endblock %}
+{% block title %}Lista de Usuários{% endblock %}
+{% block heading %}Gestão de Usuários{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">All Users</h5>
+        <h5 class="mb-0">Todos os usuários</h5>
         {% if user.is_superuser %}
         <a href="{% url 'register_user' %}" class="btn btn-sm btn-primary">
-            <i class="fas fa-plus me-1"></i> Add User
+            <i class="fas fa-plus me-1"></i> Adicionar
         </a>
         {% endif %}
     </div>
@@ -18,7 +18,7 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Username</th>
+                        <th>Nome de Usuário</th>
                         <th>Email</th>
                         <th>Papéis</th>
                         <th>Lojas</th>
@@ -35,10 +35,10 @@
                                 <span class="badge bg-danger">Superuser</span>
                             {% endif %}
                             {% if user.is_architect %}
-                                <span class="badge bg-info">Architect</span>
+                                <span class="badge bg-info">Arquiteto</span>
                             {% endif %}
                             {% if user.is_store_admin %}
-                                <span class="badge bg-success">Store Admin</span>
+                                <span class="badge bg-success">Adm. Loja</span>
                             {% endif %}
                         </td>
                         <td>

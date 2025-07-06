@@ -12,7 +12,7 @@ class ArchitectForm(forms.ModelForm):
     class Meta:
         model = Architect
         fields = '__all__'
-        exclude = ('user',)
+        ##exclude = ('user',)
 
 class StoreForm(forms.ModelForm):
     class Meta:

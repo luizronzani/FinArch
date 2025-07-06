@@ -1,15 +1,15 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Architect List{% endblock %}
-{% block heading %}Architect Management{% endblock %}
+{% block title %}Lista de Arquitetos{% endblock %}
+{% block heading %}Gestão de Arquitetos{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">All Architects</h5>
+        <h5 class="mb-0">Todos os Arquitetos </h5>
         {% if user.is_staff %}
         <a href="{% url 'register_architect' %}" class="btn btn-sm btn-primary">
-            <i class="fas fa-plus me-1"></i> Add Architect
+            <i class="fas fa-plus me-1"></i> Adicionar
         </a>
         {% endif %}
     </div>
@@ -18,11 +18,11 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Nome</th>
                         <th>CPF</th>
-                        <th>Registration</th>
-                        <th>User Account</th>
-                        <th>Actions</th>
+                        <th>Registro (CAU)</th>
+                        <th>Usuário</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>

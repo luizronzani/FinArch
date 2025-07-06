@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'crispy_forms',
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -114,7 +116,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static'),  # Caminho para seus arquivos estáticos
+]
 STATIC_URL = '/static/'
 MEDIA_URL= '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -130,3 +134,7 @@ AUTH_USER_MODEL = 'core.CustomUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'sale_list'  # After login, where to redirect
 LOGOUT_REDIRECT_URL = 'login'     # After logout, where to redirect
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"

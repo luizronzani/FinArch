@@ -1,0 +1,175 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Gestão para Arquitetos{% endblock %}
+
+{% block content %}
+<header class="bg-primary text-white py-5">
+    <div class="container text-center">
+        <img src="{% static 'core/img/logo.png' %}" alt="FinArch Logo" class="mb-4" style="height: 350px;">
+        <!--<h1 class="display-4">FinArch</h1>-->
+        <p class="lead">Solução de gestão financeira para escritórios de arquitetura.</p>
+        <a href="{% url 'login' %}" class="btn btn-light btn-lg mt-3">Acessar Sistema</a>
+    </div>
+</header>
+
+<section class="py-5" id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="section-heading">Recursos Principais</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-money-bill-wave fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Controle Financeiro</h4>
+                        <p class="card-text">Registro completo de vendas e comissões com relatórios detalhados.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Gestão de Arquitetos</h4>
+                        <p class="card-text">Cadastro e acompanhamento individual de cada profissional.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-store fa-3x mb-3 text-primary"></i>
+                        <h4 class="card-title">Controle por Loja</h4>
+                        <p class="card-text">Organização das vendas por unidade comercial com métricas específicas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light py-5" id="how-it-works">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="section-heading">Como Funciona</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="step-number">1</div>
+                        <h4 class="card-title">Cadastro</h4>
+                        <p class="card-text">Administrador cadastra arquitetos e lojas no sistema.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="step-number">2</div>
+                        <h4 class="card-title">Registro de Vendas</h4>
+                        <p class="card-text">Equipe registra cada venda com os dados completos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="step-number">3</div>
+                        <h4 class="card-title">Relatórios</h4>
+                        <p class="card-text">Geração automática de relatórios financeiros detalhados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="section-heading">Contato</h2>
+                <hr class="my-4">
+                <p class="mb-5">Entre em contato para saber mais sobre nossa solução</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Seu Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-left">
+                <p class="mb-0">>FinArch &copy; {% now "Y" %} - Luiz Mariano Ronzani</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>-->
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    header {
+        background: linear-gradient(135deg, #0062cc 0%, #007bff 100%);
+    }
+    
+    .section-heading {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section-heading:after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 3px;
+        background: #007bff;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+{% endblock %}

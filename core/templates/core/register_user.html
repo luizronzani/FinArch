@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Register User{% endblock %}
-{% block heading %}Register New User{% endblock %}
+{% block title %}Usuários{% endblock %}
+{% block heading %}Registro de Usuário{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -10,7 +10,7 @@
             {% csrf_token %}
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="id_username" class="form-label">Username</label>
+                    <label for="id_username" class="form-label">Nome de Usuário</label>
                     {{ form.username }}
                     {% if form.username.errors %}
                         <div class="text-danger">{{ form.username.errors }}</div>
@@ -26,14 +26,14 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="id_password1" class="form-label">Password</label>
+                    <label for="id_password1" class="form-label">Senha</label>
                     {{ form.password1 }}
                     {% if form.password1.errors %}
                         <div class="text-danger">{{ form.password1.errors }}</div>
                     {% endif %}
                 </div>
                 <div class="col-md-6">
-                    <label for="id_password2" class="form-label">Confirm Password</label>
+                    <label for="id_password2" class="form-label">Confirme a senha</label>
                     {{ form.password2 }}
                     {% if form.password2.errors %}
                         <div class="text-danger">{{ form.password2.errors }}</div>
@@ -44,21 +44,21 @@
                 <div class="col-md-4">
                     <div class="form-check">
                         {{ form.is_architect }}
-                        <label class="form-check-label" for="id_is_architect">Is Architect</label>
+                        <label class="form-check-label" for="id_is_architect">Arquiteto</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-check">
                         {{ form.is_store_admin }}
-                        <label class="form-check-label" for="id_is_store_admin">Is Store Admin</label>
+                        <label class="form-check-label" for="id_is_store_admin">Adm. Loja</label>
                     </div>
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label">Allowed Stores</label>
+                <label class="form-label">Lojas Permitidas</label>
                 {{ form.allowed_stores }}
             </div>
-            <button type="submit" class="btn btn-primary">Register User</button>
+            <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
 </div>

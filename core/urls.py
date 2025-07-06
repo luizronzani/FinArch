@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from core.views import landing_page
 
 urlpatterns = [
     path('register/user/', views.register_user, name='register_user'),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('stores/', views.store_list, name='store_list'),
     path('register/sale/', views.register_sale, name='register_sale'),
     path('sales/', views.sale_list, name='sale_list'),
+    path('', landing_page, name='landing'),
 ]

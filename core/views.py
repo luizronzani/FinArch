@@ -77,3 +77,6 @@ def sale_list(request):
     else:
         sales = Sale.objects.filter(store__in=request.user.allowed_stores.all())
     return render(request, 'core/sale_list.html', {'sales': sales})
+
+def landing_page(request):
+    return render(request, 'core/landing.html')

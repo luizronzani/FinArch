@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinArch - {% block title %}{% endblock %}</title>
@@ -11,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+    <link rel="icon" href="{% static 'core/img/favicon.ico' %}" type="image/x-icon">
+    
     <style>
         .navbar-brand {
             font-weight: 700;

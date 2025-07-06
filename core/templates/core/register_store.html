@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Register Store{% endblock %}
-{% block heading %}Register New Store{% endblock %}
+{% block title %}Registro de Lojas{% endblock %}
+{% block heading %}Registrar Nova Loja{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -9,27 +9,29 @@
         <form method="post">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="id_name" class="form-label">Store Name</label>
+                <label for="id_name" class="form-label">Nome</label>
                 {{ form.name }}
                 {% if form.name.errors %}
                     <div class="text-danger">{{ form.name.errors }}</div>
                 {% endif %}
             </div>
             <div class="mb-3">
-                <label for="id_address" class="form-label">Address</label>
+                <label for="id_address" class="form-label">Endereço</label>
                 {{ form.address }}
                 {% if form.address.errors %}
                     <div class="text-danger">{{ form.address.errors }}</div>
                 {% endif %}
             </div>
             <div class="mb-3">
-                <label for="id_admin" class="form-label">Store Admin</label>
+                <label for="id_admin" class="form-label">Adm. Loja</label>
                 {{ form.admin }}
                 {% if form.admin.errors %}
                     <div class="text-danger">{{ form.admin.errors }}</div>
                 {% endif %}
             </div>
-            <button type="submit" class="btn btn-primary">Register Store</button>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Registrar</button> 
+            </div>
         </form>
     </div>
 </div>

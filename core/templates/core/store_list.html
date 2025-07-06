@@ -1,15 +1,15 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Store List{% endblock %}
-{% block heading %}Store Management{% endblock %}
+{% block title %}Lista de Lojas{% endblock %}
+{% block heading %}Gestão de Lojas{% endblock %}
 
 {% block content %}
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">All Stores</h5>
+        <h5 class="mb-0">Todas as Lojas</h5>
         {% if user.is_staff %}
         <a href="{% url 'register_store' %}" class="btn btn-sm btn-primary">
-            <i class="fas fa-plus me-1"></i> Add Store
+            <i class="fas fa-plus me-1"></i> Adicionar
         </a>
         {% endif %}
     </div>
