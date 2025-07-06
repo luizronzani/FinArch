@@ -80,3 +80,11 @@ def sale_list(request):
 
 def landing_page(request):
     return render(request, 'core/landing.html')
+
+@login_required
+def report(request):
+    if request.user.is_superuser:
+        sales = Sale.objects.all()
+    else:
+        sales = Sale.objects.filter(store__in=request.user.allowed_stores.all())
+    return render(request, 'core/report/report.html', {'sales': sales})

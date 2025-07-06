@@ -55,7 +55,7 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <body>
-    <!-- Navigation -->
+    <!-- NAV BAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'sale_list' %}">FinArch</a>
@@ -67,6 +67,9 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'sale_list' %}">Vendas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sale_list' %}">Relatórios</a>
                     </li>
                     {% if user.is_staff %}
                     <li class="nav-item">
@@ -124,6 +127,12 @@
                         <a class="nav-link {% if request.resolver_match.url_name == 'sale_list' %}active{% endif %}"
                             href="{% url 'sale_list' %}">
                             <i class="fas fa-receipt me-2"></i> Vendas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'report' %}active{% endif %}"
+                            href="{% url 'report' %}">
+                            <i class="fas fa-line-chart me-2"></i> Relatórios
                         </a>
                     </li>
                     {% if user.is_staff %}
