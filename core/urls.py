@@ -12,5 +12,6 @@ urlpatterns = [
     path('register/sale/', views.register_sale, name='register_sale'),
     path('sales/', views.sale_list, name='sale_list'),
     path('report/', views.report, name='report'),
-    path('', landing_page, name='landing'),
+    path('', landing_page, name='landing'),  # vírgula adicionada aqui
+    
 ]

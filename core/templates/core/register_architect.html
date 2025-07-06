@@ -1,43 +1,18 @@
 {% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Registro de Arquitetos{% endblock %}
 {% block heading %}Registrar Novo Arquiteto{% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="card mx-auto" style="max-width: 720px;">
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="id_name" class="form-label">Nome</label>
-                    {{ form.name }}
-                    {% if form.name.errors %}
-                        <div class="text-danger">{{ form.name.errors }}</div>
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <label for="id_cpf" class="form-label">CPF</label>
-                    {{ form.cpf }}
-                    {% if form.cpf.errors %}
-                        <div class="text-danger">{{ form.cpf.errors }}</div>
-                    {% endif %}
-                </div>
+            {{ form|crispy }}
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
             </div>
-            <div class="mb-3">
-                <label for="id_registration_number" class="form-label">Registro (CAU)</label>
-                {{ form.registration_number }}
-                {% if form.registration_number.errors %}
-                    <div class="text-danger">{{ form.registration_number.errors }}</div>
-                {% endif %}
-            </div>
-            <div class="mb-3">
-                <label for="id_user" class="form-label">Usuário</label>
-                {{ form.user }}
-                {% if form.user.errors %}
-                    <div class="text-danger">{{ form.user.errors }}</div>
-                {% endif %}
-            <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
     </div>
 </div>

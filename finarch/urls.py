@@ -1,9 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from core.views import ArchitectAutocomplete, StoreAutocomplete
 
 urlpatterns = [
+    #path('autocomplete/', include('dal_select2.urls')),  # Corrigido aqui
     path('admin/', admin.site.urls),
+    path('architect-autocomplete/', ArchitectAutocomplete.as_view(), name='architect-autocomplete'),
+    path('store-autocomplete/', StoreAutocomplete.as_view(), name='store-autocomplete'),
     path('', include('core.urls')),
     path('accounts/', include([
         path('login/', auth_views.LoginView.as_view(), name='login'),

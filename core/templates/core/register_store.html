@@ -1,36 +1,19 @@
 {% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Registro de Lojas{% endblock %}
 {% block heading %}Registrar Nova Loja{% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="card mx-auto" style="max-width: 480px;">
     <div class="card-body">
-        <form method="post">
+        <form method="post" novalidate>
             {% csrf_token %}
-            <div class="mb-3">
-                <label for="id_name" class="form-label">Nome</label>
-                {{ form.name }}
-                {% if form.name.errors %}
-                    <div class="text-danger">{{ form.name.errors }}</div>
-                {% endif %}
-            </div>
-            <div class="mb-3">
-                <label for="id_address" class="form-label">Endereço</label>
-                {{ form.address }}
-                {% if form.address.errors %}
-                    <div class="text-danger">{{ form.address.errors }}</div>
-                {% endif %}
-            </div>
-            <div class="mb-3">
-                <label for="id_admin" class="form-label">Adm. Loja</label>
-                {{ form.admin }}
-                {% if form.admin.errors %}
-                    <div class="text-danger">{{ form.admin.errors }}</div>
-                {% endif %}
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Registrar</button> 
+            {{ form|crispy }}
+            <!-- Se preferir, pode deixar o botão no helper do form -->
+            <!-- Ou colocar aqui: -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
             </div>
         </form>
     </div>

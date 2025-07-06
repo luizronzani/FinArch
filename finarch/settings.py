@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
-    'crispy_forms',
+    'core', #app
+    'crispy_forms', #formularios
     "crispy_bootstrap4",
+    'dal',  # django-autocomplete-light
+    'dal_select2', # django-autocomplete-light with Select2
 ]
 
 MIDDLEWARE = [
@@ -77,10 +79,15 @@ WSGI_APPLICATION = 'finarch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'finarch',      
+        'USER': 'root',              
+        'PASSWORD': 'master',        
+        'HOST': '127.0.0.1',         
+        'PORT': '3306',               
     }
 }
+
 
 
 # Password validation

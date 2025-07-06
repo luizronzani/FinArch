@@ -1,11 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import CustomUser, Architect, Store, Sale
+from .models import CustomUser, Architect, Store, Sale, UserStore
 from .forms import CustomUserCreationForm, ArchitectForm, StoreForm, SaleForm
+from dal import autocomplete
+
+class ArchitectAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Architect.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
+class StoreAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Store.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__icontains=self.q)
+        return qs
+
 
 def is_store_user(user):
-    return user.is_authenticated and (user.is_store_admin or user.allowed_stores.exists())
+    # Verifica se usuário está autenticado e tem lojas associadas via UserStore
+    return user.is_authenticated and UserStore.objects.filter(user=user).exists()
 
 @staff_member_required
 def register_user(request):
@@ -63,7 +82,10 @@ def register_sale(request):
         if form.is_valid():
             sale = form.save(commit=False)
             sale.created_by = request.user
-            #sale.store = request.user.allowed_stores.first()  # Or let user select if multiple
+            # Se quiser limitar a loja para a primeira associada do usuário, descomente:
+            # user_stores = UserStore.objects.filter(user=request.user)
+            # if user_stores.exists():
+            #     sale.store = user_stores.first().store
             sale.save()
             return redirect('sale_list')
     else:
@@ -75,7 +97,9 @@ def sale_list(request):
     if request.user.is_superuser:
         sales = Sale.objects.all()
     else:
-        sales = Sale.objects.filter(store__in=request.user.allowed_stores.all())
+        # Buscar lojas associadas via UserStore
+        user_stores = UserStore.objects.filter(user=request.user).values_list('store', flat=True)
+        sales = Sale.objects.filter(store__in=user_stores)
     return render(request, 'core/sale_list.html', {'sales': sales})
 
 def landing_page(request):
@@ -86,5 +110,6 @@ def report(request):
     if request.user.is_superuser:
         sales = Sale.objects.all()
     else:
-        sales = Sale.objects.filter(store__in=request.user.allowed_stores.all())
+        user_stores = UserStore.objects.filter(user=request.user).values_list('store', flat=True)
+        sales = Sale.objects.filter(store__in=user_stores)
     return render(request, 'core/report/report.html', {'sales': sales})
