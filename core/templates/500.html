@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Erro Interno do Servidor (500){% endblock %}
+
+{% block heading %}Erro Interno do Servidor (500){% endblock %}
+
+{% block content %}
+<div class="alert alert-danger text-center" role="alert" style="margin-top: 2rem;">
+    <h2>Algo deu errado no servidor.</h2>
+    <p>Por favor, tente novamente mais tarde.</p>
+    <a href="{% url 'landing' %}" class="btn btn-primary mt-3">Voltar para a Página Inicial</a>
+</div>
+{% endblock %}

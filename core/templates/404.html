@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Página Não Encontrada (404){% endblock %}
+
+{% block heading %}Página Não Encontrada (Erro 404){% endblock %}
+
+{% block content %}
+<div class="alert alert-warning text-center" role="alert" style="margin-top: 2rem;">
+    <h2>Ops! A página que você está procurando não foi encontrada.</h2>
+    <p>Verifique o endereço ou retorne para a página inicial.</p>
+    <a href="{% url 'landing' %}" class="btn btn-primary mt-3">Voltar para a Página Inicial</a>
+</div>
+{% endblock %}

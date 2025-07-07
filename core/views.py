@@ -171,6 +171,11 @@ def sales_ajax(request):
 
     return JsonResponse({'data': data})
 
+########################################
+############# RELATORIOS# #############
+########################################
+
+
 @login_required
 def relatorios(request):
     user = request.user
@@ -208,3 +213,5 @@ def relatorios(request):
         'loja_selecionada': int(loja_selecionada) if loja_selecionada else None,
     }
     return render(request, 'core/relatorios.html', context)
+
+

@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Requisição Inválida (400){% endblock %}
+
+{% block heading %}Requisição Inválida (400){% endblock %}
+
+{% block content %}
+<div class="alert alert-warning text-center" role="alert" style="margin-top: 2rem;">
+    <h2>Requisição inválida.</h2>
+    <p>Por favor, verifique o que foi enviado e tente novamente.</p>
+    <a href="{% url 'landing' %}" class="btn btn-primary mt-3">Voltar para a Página Inicial</a>
+</div>
+{% endblock %}
