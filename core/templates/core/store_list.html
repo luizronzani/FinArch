@@ -19,21 +19,23 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>CNPJ</th>
                         <th>Endereço</th>
-                        <th>Admin</th>
-                        <th>Ações</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for store in stores %}
                     <tr>
                         <td>{{ store.name }}</td>
+                        <td>{{ store.cnpj }}</td>
                         <td>{{ store.address }}</td>
-                        <td>{{ store.admin.username }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                            {% if store.is_active %}
+                                <span class="badge bg-success">Ativo</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inativo</span>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

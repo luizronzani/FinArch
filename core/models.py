@@ -6,7 +6,7 @@ import re
 
 class CustomUser(AbstractUser):
     # Campos adicionais
-    is_store_admin = models.BooleanField(default=False)
+    is_store_admin = models.BooleanField("Adm. Loja",default=False)
     creation_date = models.DateTimeField(default=timezone.now)
 
     # Campos padrão do AbstractUser já incluem:

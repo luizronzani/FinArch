@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import CustomUser, Architect, Store, Sale, UserStore
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -17,6 +17,12 @@ class CustomUserCreationForm(UserCreationForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Registrar Usuário', css_class='btn-primary'))
 
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Entrar', css_class='btn btn-primary w-100'))
 
 class ArchitectForm(forms.ModelForm):
     class Meta:

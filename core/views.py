@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import CustomUser, Architect, Store, Sale, UserStore
-from .forms import CustomUserCreationForm, ArchitectForm, StoreForm, SaleForm, UserStoreFilterForm, UserStoreForm
+from .forms import CustomUserCreationForm, ArchitectForm, StoreForm, SaleForm, UserStoreFilterForm, UserStoreForm, CustomLoginForm
 from dal import autocomplete
 from datetime import datetime
 from django.db.models import Sum
 from django.db.models.functions import ExtractMonth
 from django.http import JsonResponse
+from django.contrib.auth.views import LoginView
 
 class ArchitectAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -215,3 +216,10 @@ def relatorios(request):
     return render(request, 'core/relatorios.html', context)
 
 
+########################################
+############# LOGIN  ###################
+########################################
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    authentication_form = CustomLoginForm

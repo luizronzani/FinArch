@@ -19,23 +19,23 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>CPF</th>
+                        <th>CPF/CNPJ</th>
                         <th>Registro (CAU)</th>
-                        <th>Usuário</th>
-                        <th>Ações</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for architect in architects %}
                     <tr>
                         <td>{{ architect.name }}</td>
-                        <td>{{ architect.cpf }}</td>
+                        <td>{{ architect.cpf_cnpj }}</td>
                         <td>{{ architect.registration_number }}</td>
-                        <td>{{ architect.user.username }}</td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                            {% if architect.is_active %}
+                                <span class="badge bg-success">Ativo</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inativo</span>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

@@ -21,8 +21,7 @@
                         <th>Nome de Usuário</th>
                         <th>Email</th>
                         <th>Papéis</th>
-                        <th>Lojas</th>
-                        <th>Ações</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,14 +41,11 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% for store in user.allowed_stores.all %}
-                                <span class="badge bg-secondary">{{ store.name }}</span>
-                            {% endfor %}
-                        </td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                            {% if user.is_active %}
+                                <span class="badge bg-success">Ativo</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inativo</span>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
