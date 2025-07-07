@@ -1,0 +1,20 @@
+# Ignorar a virtualenv
+venv/
+.env/
+
+# Arquivos Python compilados
+__pycache__/
+*.py[cod]
+
+# Arquivos de configuração de produção
+*settings_prod.py
+
+# Arquivos estáticos coletados
+staticfiles/
+static/
+
+# Outros arquivos não rastreáveis
+*.log
+*.sqlite3
+*.zip
+*.bak
