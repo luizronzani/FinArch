@@ -1,0 +1,114 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Relatórios de Vendas{% endblock %}
+{% block heading %}Relatórios de Vendas{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-10">
+                <label for="store" class="form-label">Filtrar por Loja:</label>
+                <select name="store" id="store" class="form-select" onchange="this.form.submit()">
+                    <option value="">Todas as lojas</option>
+                    {% for loja in lojas %}
+                        <option value="{{ loja.id }}" {% if loja_selecionada == loja.id %}selected{% endif %}>
+                            {{ loja.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if vendas_por_mes %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                Vendas por Mês Ano Atual
+            </div>
+            <div class="card-body">
+                <canvas id="graficoMeses"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                Total Ano Atual
+            </div>
+            <div class="card-body">
+                <canvas id="graficoTotal"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">Nenhuma venda registrada para este ano.</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+    const vendasMes = Array(12).fill(0);
+
+    {% for item in vendas_por_mes %}
+        vendasMes[{{ item.mes|add:"-1" }}] = {{ item.total|floatformat:2 }};
+    {% endfor %}
+
+    // Gráfico de Vendas por Mês
+    const ctxMes = document.getElementById('graficoMeses').getContext('2d');
+    new Chart(ctxMes, {
+        type: 'bar',
+        data: {
+            labels: meses,
+            datasets: [{
+                label: 'Vendas (R$)',
+                data: vendasMes,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de Total Anual
+    const ctxTotal = document.getElementById('graficoTotal').getContext('2d');
+    new Chart(ctxTotal, {
+        type: 'bar',
+        data: {
+            labels: ['Total'],
+            datasets: [{
+                label: 'Total de Vendas (R$)',
+                data: [{{ total_ano|floatformat:2 }}],
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

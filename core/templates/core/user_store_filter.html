@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block title %}Relação Usuário x Loja{% endblock %}
+{% block heading %}Relações entre Usuários e Lojas{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    {{ form.user.label_tag }} {{ form.user }}
+                </div>
+                <div class="col-md-5">
+                    {{ form.store.label_tag }} {{ form.store }}
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <a href="{% url 'register_user_store' %}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus me-1"></i> Adicionar
+                    </a>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if user_store %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Usuário</th>
+            <th>Loja</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in user_store %}
+        <tr>
+            <td>{{ item.user.username }}</td>
+            <td>{{ item.store.name }}</td>
+            <td>
+                <form method="post" action="{% url 'delete_user_store' item.pk %}" onsubmit="return confirm('Tem certeza que deseja remover esta ligação?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash-alt"></i> Remover
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<div class="alert alert-info">Nenhuma relação encontrada.</div>
+{% endif %}
+{% endblock %}

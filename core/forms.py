@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Architect, Store, Sale
+from .models import CustomUser, Architect, Store, Sale, UserStore
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from dal import autocomplete
@@ -29,6 +29,30 @@ class ArchitectForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Registrar Arquiteto', css_class='btn-primary'))
 
+class UserStoreForm(forms.ModelForm):
+    class Meta:
+        model = UserStore
+        fields = ['user', 'store']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Registrar Ligação', css_class='btn-primary'))
+
+class UserStoreFilterForm(forms.Form):
+    user = forms.ModelChoiceField(
+        queryset=CustomUser.objects.all(),
+        required=False,
+        label='Usuário',
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+    store = forms.ModelChoiceField(
+        queryset=Store.objects.all(),
+        required=False,
+        label='Loja',
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
 
 class StoreForm(forms.ModelForm):
     class Meta:
@@ -74,14 +98,15 @@ class SaleForm(forms.ModelForm):
         labels = {
             'architect': 'Arquiteto',
             'store': 'Loja',
-            'value': 'Valor da Venda',}
+            'value': 'Valor da Venda',
+        }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
 
-        if user and not user.is_superuser:
-            lojas_user = UserStore.objects.filter(user=user).values_list('store', flat=True)
+        if self.user and not self.user.is_superuser:
+            lojas_user = UserStore.objects.filter(user=self.user).values_list('store', flat=True)
             self.fields['store'].queryset = Store.objects.filter(id__in=lojas_user)
 
         self.fields['architect'].queryset = self.fields['architect'].queryset.filter(is_active=True)
@@ -89,3 +114,12 @@ class SaleForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Registrar Venda', css_class='btn-primary'))
+
+    def clean_store(self):
+        store = self.cleaned_data.get('store')
+        user = self.user
+
+        if store and user and not user.is_superuser:
+            if not UserStore.objects.filter(user=user, store=store).exists():
+                raise forms.ValidationError("Você não tem permissão para registrar vendas nesta loja.")
+        return store

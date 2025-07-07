@@ -1,17 +1,17 @@
 {% extends 'core/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Registro de Arquitetos{% endblock %}
-{% block heading %}Registrar Novo Arquiteto{% endblock %}
+{% block title %}Vincular Usuário à Loja{% endblock %}
+{% block heading %}Registrar Ligação entre Usuário e Loja{% endblock %}
 
 {% block content %}
-<div class="card mx-auto" style="max-width: 720px;">
+<div class="card mx-auto" style="max-width: 500px;">
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-block">Registrar Arquiteto</button>
+                <button type="submit" class="btn btn-primary btn-block">Registrar Ligação</button>
             </div>
         </form>
     </div>
